@@ -36,6 +36,7 @@
     "hex-to-rgba": "2.0.1",
     "html-to-image": "^1.10.8",
     "lodash": "4.17.21",
+    "net": "1.0.2",
     "qrcode.react": "^3.1.0",
     "query-string": "7.1.1",
     "rc-slider": "9.7.5",
@@ -57,13 +58,15 @@
     "shallowequal": "1.1.0",
     "swr": "2.2.1",
     "typescript": "4.7.4",
+    "url": "0.11.3",
     "use-context-selector": "1.4.1",
     "viem": "1.1.4",
     "wagmi": "0.12.19",
     "web-vitals": "1.1.2"
   },
   "resolutions": {
-    "react-error-overlay": "6.0.9"
+    "@types/react": "17.0.14",
+    "@types/react-dom": "17.0.14"
   },
   "scripts": {
     "start": "PORT=3010 react-app-rewired start",
@@ -126,7 +129,8 @@
     "husky": "7.0.4",
     "lint-staged": "12.3.4",
     "prettier": "2.5.1",
-    "react-app-rewired": "2.2.1"
+    "react-app-rewired": "2.2.1",
+    "tls": "0.0.1"
   },
   "lint-staged": {
     "src/**/*.{js,ts,jsx,tsx}": [

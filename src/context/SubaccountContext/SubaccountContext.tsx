@@ -85,7 +85,7 @@ function getFactorByChainId(chainId: number) {
   }
 }
 
-export function SubaccountContextProvider({ children }: PropsWithChildren) {
+export function SubaccountContextProvider({ children }: PropsWithChildren<{}>) {
   const [modalOpen, setModalOpen] = useState(false);
   const [notificationState, setNotificationState] = useState<SubaccountNotificationState>("none");
 
