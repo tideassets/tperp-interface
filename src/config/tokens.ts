@@ -1,6 +1,6 @@
 import { Token } from "domain/tokens";
 import { ethers } from "ethers";
-import { ARBITRUM, ARBITRUM_GOERLI, AVALANCHE, AVALANCHE_FUJI } from "./chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI } from "./chains";
 import { getContract } from "./contracts";
 
 export const NATIVE_TOKEN_ADDRESS = ethers.constants.AddressZero;
@@ -440,7 +440,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
       isPlatformToken: true,
     },
   ],
-  [ARBITRUM_GOERLI]: [
+  [ARBITRUM_SEPOLIA]: [
     {
       name: "Ethereum",
       symbol: "ETH",
@@ -858,7 +858,7 @@ export const TOKENS_BY_SYMBOL_MAP: { [chainId: number]: { [symbol: string]: Toke
 export const WRAPPED_TOKENS_MAP: { [chainId: number]: Token } = {};
 export const NATIVE_TOKENS_MAP: { [chainId: number]: Token } = {};
 
-const CHAIN_IDS = [ARBITRUM, ARBITRUM_GOERLI, AVALANCHE, AVALANCHE_FUJI];
+const CHAIN_IDS = [ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI];
 
 for (let j = 0; j < CHAIN_IDS.length; j++) {
   const chainId = CHAIN_IDS[j];

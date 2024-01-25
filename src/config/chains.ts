@@ -15,6 +15,7 @@ export const AVALANCHE = 43114;
 export const AVALANCHE_FUJI = 43113;
 export const ARBITRUM = 42161;
 export const ARBITRUM_GOERLI = 421613;
+export const ARBITRUM_SEPOLIA= 421614;
 export const FEES_HIGH_BPS = 50;
 export const DEFAULT_ALLOWED_SLIPPAGE_BPS = 30;
 
@@ -25,7 +26,7 @@ export const CHAIN_ID = DEFAULT_CHAIN_ID;
 export const SUPPORTED_CHAIN_IDS = [ARBITRUM, AVALANCHE];
 
 if (isDevelopment()) {
-  SUPPORTED_CHAIN_IDS.push(AVALANCHE_FUJI, ARBITRUM_GOERLI);
+  SUPPORTED_CHAIN_IDS.push(AVALANCHE_FUJI, ARBITRUM_GOERLI, ARBITRUM_SEPOLIA);
 }
 
 export const IS_NETWORK_DISABLED = {
@@ -38,6 +39,7 @@ export const CHAIN_NAMES_MAP = {
   [BSС_MAINNET]: "BSC",
   [BSС_TESTNET]: "BSC Testnet",
   [ARBITRUM_GOERLI]: "Arbitrum Goerli",
+  [ARBITRUM_SEPOLIA]: "Arbitrum Sepolia",
   [ARBITRUM]: "Arbitrum",
   [AVALANCHE]: "Avalanche",
   [AVALANCHE_FUJI]: "Avalanche Fuji",
@@ -97,6 +99,10 @@ export const EXECUTION_FEE_CONFIG_V2: {
     shouldUseMaxPriorityFeePerGas: false,
     defaultBufferBps: 1000, // 10%
   },
+  [ARBITRUM_SEPOLIA]: {
+    shouldUseMaxPriorityFeePerGas: false,
+    defaultBufferBps: 1000, // 10%
+  },
 };
 
 const constants = {
@@ -117,6 +123,20 @@ const constants = {
   },
 
   [ARBITRUM_GOERLI]: {
+    nativeTokenSymbol: "ETH",
+    wrappedTokenSymbol: "WETH",
+    defaultCollateralSymbol: "USDC",
+    defaultFlagOrdersEnabled: false,
+    positionReaderPropsLength: 9,
+    v2: true,
+
+    SWAP_ORDER_EXECUTION_GAS_FEE: parseEther("0.0003"),
+    INCREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.0003"),
+    // contract requires that execution fee be strictly greater than instead of gte
+    DECREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.000300001"),
+  },
+
+  [ARBITRUM_SEPOLIA]: {
     nativeTokenSymbol: "ETH",
     wrappedTokenSymbol: "WETH",
     defaultCollateralSymbol: "USDC",
@@ -194,6 +214,7 @@ export const RPC_PROVIDERS = {
   ],
   [BSС_TESTNET]: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
   [ARBITRUM]: ["https://arb1.arbitrum.io/rpc"],
+  [ARBITRUM_SEPOLIA]: ["https://sepolia-rollup.arbitrum.io/rpc"],
   [ARBITRUM_GOERLI]: [
     "https://goerli-rollup.arbitrum.io/rpc",
     // "https://endpoints.omniatech.io/v1/arbitrum/goerli/public",
@@ -219,6 +240,7 @@ export const FALLBACK_PROVIDERS = {
     "https://ava-testnet.public.blastapi.io/ext/bc/C/rpc",
   ],
   [ARBITRUM_GOERLI]: ["https://arb-goerli.g.alchemy.com/v2/cZfd99JyN42V9Clbs_gOvA3GSBZH1-1j"],
+  [ARBITRUM_SEPOLIA]: ["https://arbitrum-sepolia.infura.io/v3/1c177df366ef47b689e8b84ee6c7297d"],
 };
 
 export const NETWORK_METADATA: { [chainId: number]: NetworkMetadata } = {
@@ -254,6 +276,17 @@ export const NETWORK_METADATA: { [chainId: number]: NetworkMetadata } = {
     },
     rpcUrls: RPC_PROVIDERS[ARBITRUM_GOERLI],
     blockExplorerUrls: ["https://goerli.arbiscan.io/"],
+  },
+  [ARBITRUM_SEPOLIA]: {
+    chainId: "0x" + ARBITRUM_GOERLI.toString(16),
+    chainName: "Arbitrum Sepolia Testnet",
+    nativeCurrency: {
+      name: "ETH",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    rpcUrls: RPC_PROVIDERS[ARBITRUM_SEPOLIA],
+    blockExplorerUrls: ["https://sepolia.arbiscan.io/"],
   },
   [ARBITRUM]: {
     chainId: "0x" + ARBITRUM.toString(16),
@@ -339,6 +372,8 @@ export function getExplorerUrl(chainId) {
     return "https://testnet.bscscan.com/";
   } else if (chainId === ARBITRUM_GOERLI) {
     return "https://goerli.arbiscan.io/";
+  } else if (chainId === ARBITRUM_SEPOLIA) {
+    return "https://sepolia.arbiscan.io/";
   } else if (chainId === ARBITRUM) {
     return "https://arbiscan.io/";
   } else if (chainId === AVALANCHE) {

@@ -2,7 +2,7 @@ import Footer from "components/Footer/Footer";
 import { Trans } from "@lingui/macro";
 import { useEffect, useState } from "react";
 import { sleep } from "lib/sleep";
-import { ARBITRUM, ARBITRUM_GOERLI, AVALANCHE, AVALANCHE_FUJI, getChainName } from "config/chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, getChainName } from "config/chains";
 import { switchNetwork } from "lib/wallets";
 import { isDevelopment } from "config/env";
 import useWallet from "lib/wallets/useWallet";
@@ -48,8 +48,8 @@ export function SyntheticsFallbackPage() {
                   {getChainName(AVALANCHE_FUJI)}
                 </div>
 
-                <div className="clickable underline" onClick={() => switchNetwork(ARBITRUM_GOERLI, active)}>
-                  {getChainName(ARBITRUM_GOERLI)}
+                <div className="clickable underline" onClick={() => switchNetwork(ARBITRUM_SEPOLIA, active)}>
+                  {getChainName(ARBITRUM_SEPOLIA)}
                 </div>
               </>
             )}

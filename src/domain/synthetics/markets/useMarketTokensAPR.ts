@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { ARBITRUM, ARBITRUM_GOERLI } from "config/chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA } from "config/chains";
 import { getTokenBySymbol } from "config/tokens";
 import { sub } from "date-fns";
 import { BigNumber } from "ethers";
@@ -57,7 +57,7 @@ function useIncentivesBonusApr(chainId: number): MarketTokensAPRData {
       arbTokenPrice = tokensData[arbTokenAddress]?.prices?.minPrice ?? BigNumber.from(0);
     }
 
-    const shouldCalcBonusApr = arbTokenPrice.gt(0) && (chainId === ARBITRUM || chainId === ARBITRUM_GOERLI);
+    const shouldCalcBonusApr = arbTokenPrice.gt(0) && (chainId === ARBITRUM || chainId === ARBITRUM_SEPOLIA);
 
     return marketAddresses.reduce((acc, marketAddress) => {
       if (!shouldCalcBonusApr || !rawIncentivesStats) return { ...acc, [marketAddress]: BigNumber.from(0) };

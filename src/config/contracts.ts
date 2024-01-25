@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { ARBITRUM, ARBITRUM_GOERLI, AVALANCHE, AVALANCHE_FUJI, BSС_MAINNET, BSС_TESTNET } from "./chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BSС_MAINNET, BSС_TESTNET } from "./chains";
 
 const { AddressZero } = ethers.constants;
 
@@ -76,7 +76,7 @@ const CONTRACTS = {
     GMT_USDG_GMX_IOU: "0x481312655F81b5e249780A6a49735335BF6Ca7f4",
     XGMT_USDG_GMX_IOU: "0x8095F1A92526C304623483018aA28cC6E62EB1e1",
   },
-  [ARBITRUM_GOERLI]: {
+  [ARBITRUM_SEPOLIA]: {
     // arbitrum testnet
     Vault: AddressZero,
     Router: AddressZero,
@@ -118,18 +118,31 @@ const CONTRACTS = {
     ReferralReader: AddressZero,
 
     // Synthetics
-    DataStore: "0xbA2314b0f71ebC705aeEBeA672cc3bcEc510D03b",
-    EventEmitter: "0x2fbE45fCb58B7106CF0a3Be9225D5Ed5A1004cc4",
-    ExchangeRouter: "0xFE98518C9c8F1c5a216E999816c2dE3199f295D2",
-    SubaccountRouter: "0x4Ae6ecDD55ee1066477Ee4B5Fc9f4D04C4CE66E9",
-    DepositVault: "0x838a9bdf8736eD522A60F5f715e4F3FC2BC91A08",
-    WithdrawalVault: "0xaAac001C2a2727Ff2d484C4Ad7d2079C7094e7Ef",
-    OrderVault: "0x82aFd2590814a7Ce3d7ea6b63F80481F8b227bA9",
-    SyntheticsReader: "0xab747a7bb64B74D78C6527C1F148808a19120475",
-    SyntheticsRouter: "0xa960786Bc30F8587279df6116F9E0B15C5b034dE",
+    // DataStore: "0xbA2314b0f71ebC705aeEBeA672cc3bcEc510D03b",
+    // EventEmitter: "0x2fbE45fCb58B7106CF0a3Be9225D5Ed5A1004cc4",
+    // ExchangeRouter: "0xFE98518C9c8F1c5a216E999816c2dE3199f295D2",
+    // SubaccountRouter: "0x4Ae6ecDD55ee1066477Ee4B5Fc9f4D04C4CE66E9",
+    // DepositVault: "0x838a9bdf8736eD522A60F5f715e4F3FC2BC91A08",
+    // WithdrawalVault: "0xaAac001C2a2727Ff2d484C4Ad7d2079C7094e7Ef",
+    // OrderVault: "0x82aFd2590814a7Ce3d7ea6b63F80481F8b227bA9",
+    // SyntheticsReader: "0xab747a7bb64B74D78C6527C1F148808a19120475",
+    // SyntheticsRouter: "0xa960786Bc30F8587279df6116F9E0B15C5b034dE",
+    // Timelock: AddressZero,
+
+    // Multicall: "0x6d85594c9BD6b0833bC85AE62B360654A1e52D70",
+    // Synthetics
+    DataStore: "0xf3DC1faf274e013693fD7f4aF12BF07f4789A9e7",
+    EventEmitter: "0x370d09dA5071c76D1Ad96d948c6d7a9b744dBbC7",
+    ExchangeRouter: "0xBDE61d75CC713e8B0e646Fa0361f433FDbFcFdBF",
+    SubaccountRouter: "0x6672cC89368b3b36ea7a48A681ac9b3664F23f8f",
+    DepositVault: "0x26C5FdB84641bb4aAA4081067082dc497fCE5d20",
+    WithdrawalVault: "0x8A270859620cB17Fce70A7502617b0aC48a8666F",
+    OrderVault: "0x8325B0c8D2b0607284A816B52963d4AfA8f75473",
+    SyntheticsReader: "0xDE5E234F070f66Da8E44dA4C9FcED5Ce303de1d9",
+    SyntheticsRouter: "0xB71f7d65DCb841D7719890FfE860711724863119",
     Timelock: AddressZero,
 
-    Multicall: "0x6d85594c9BD6b0833bC85AE62B360654A1e52D70",
+    Multicall: "0x529f97aEC334eaF15EE22EBa84CA3fee8Ff738aD",
   },
   [ARBITRUM]: {
     // arbitrum mainnet
