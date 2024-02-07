@@ -1,11 +1,14 @@
 import CustomErrors from "abis/CustomErrors.json";
 import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, getFallbackRpcUrl, getRpcUrl } from "config/chains";
 import { PublicClient, createPublicClient, http } from "viem";
+import { createConfig } from "wagmi";
+import { multicall } from "@wagmi/core";
 import { arbitrum, arbitrumSepolia, avalanche, avalancheFuji } from "viem/chains";
 import { MulticallRequestConfig, MulticallResult } from "./types";
 
 import { sleep } from "lib/sleep";
 import { Signer } from "ethers";
+import { create } from "lodash";
 
 export const MAX_TIMEOUT = 20000;
 
@@ -99,9 +102,8 @@ export class Multicall {
 
     return instance;
   }
-
-  static getViemClient(chainId: number, rpcUrl: string) {
-    return createPublicClient({
+  static getViemClient(chainId: number, rpcUrl: string): PublicClient {
+    const client = createPublicClient({
       transport: http(rpcUrl, {
         // retries works strangely in viem, so we disable them
         retryCount: 0,
@@ -112,7 +114,25 @@ export class Multicall {
       batch: BATCH_CONFIGS[chainId].client,
       chain: CHAIN_BY_CHAIN_ID[chainId],
     });
+
+    // Here we cast the client to any to bypass the type checking,
+    // because we know that the actual type of client matches the expected type of viemClient.
+    // This is a workaround and should be avoided if possible.
+    return client as any;
   }
+  // static getViemClient(chainId: number, rpcUrl: string) {
+  //   return createPublicClient({
+  //     transport: http(rpcUrl, {
+  //       // retries works strangely in viem, so we disable them
+  //       retryCount: 0,
+  //       retryDelay: 10000000,
+  //       batch: BATCH_CONFIGS[chainId].http,
+  //     }),
+  //     pollingInterval: undefined,
+  //     batch: BATCH_CONFIGS[chainId].client,
+  //     chain: CHAIN_BY_CHAIN_ID[chainId],
+  //   });
+  // }
 
   viemClient: PublicClient;
 
@@ -166,8 +186,16 @@ export class Multicall {
       });
     });
 
+    // const config = createConfig({
+    //   autoConnect: true,
+    //   publicClient: createPublicClient({
+    //     chain: CHAIN_BY_CHAIN_ID[this.chainId],
+    //     transport: http(this.rpcUrl),
+    //   }) as any,
+    // });
+
     const response: any = await Promise.race([
-      this.viemClient.multicall({ contracts: encodedPayload as any }),
+      multicall({ contracts: encodedPayload as any }),
       sleep(maxTimeout).then(() => Promise.reject(new Error("multicall timeout"))),
     ]).catch((_viemError) => {
       const e = new Error(_viemError.message.slice(0, 150));
@@ -185,22 +213,22 @@ export class Multicall {
         throw e;
       }
 
-      const fallbackClient = Multicall.getViemClient(this.chainId, rpcUrl);
+      // const fallbackClient = Multicall.getViemClient(this.chainId, rpcUrl);
 
-      // eslint-disable-next-line no-console
-      console.log(`using multicall fallback for chain ${this.chainId}`);
+      // // eslint-disable-next-line no-console
+      // console.log(`using multicall fallback for chain ${this.chainId}`);
 
-      return fallbackClient.multicall({ contracts: encodedPayload as any }).catch((_viemError) => {
-        const e = new Error(_viemError.message.slice(0, 150));
-        // eslint-disable-next-line no-console
-        console.groupCollapsed("multicall fallback error:");
-        // eslint-disable-next-line no-console
-        console.error(e);
-        // eslint-disable-next-line no-console
-        console.groupEnd();
+      // return fallbackClient.multicall({ contracts: encodedPayload as any }).catch((_viemError) => {
+      //   const e = new Error(_viemError.message.slice(0, 150));
+      //   // eslint-disable-next-line no-console
+      //   console.groupCollapsed("multicall fallback error:");
+      //   // eslint-disable-next-line no-console
+      //   console.error(e);
+      //   // eslint-disable-next-line no-console
+      //   console.groupEnd();
 
-        throw e;
-      });
+      //   throw e;
+      // });
     });
 
     const multicallResult: MulticallResult<any> = {

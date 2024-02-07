@@ -14,8 +14,8 @@ import {
   zerionWallet,
   okxWallet,
 } from "@rainbow-me/rainbowkit/wallets";
-import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { arbitrum, arbitrumGoerli, avalanche, avalancheFuji } from "wagmi/chains";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { arbitrum, arbitrumSepolia, avalanche, avalancheFuji } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import merge from "lodash/merge";
 import { isDevelopment } from "config/env";
@@ -23,8 +23,8 @@ import { coreWallet } from "./connecters/core/coreWallet";
 import { bitgetWallet } from "./connecters/bitgetWallet/bitgetWallet";
 import binanceWallet from "./connecters/binanceW3W/binanceWallet";
 
-const WALLET_CONNECT_PROJECT_ID = "de24cddbaf2a68f027eae30d9bb5df58";
-const APP_NAME = "GMX";
+const WALLET_CONNECT_PROJECT_ID = "33b533a1d36c81d5774f51bdf0d814de";
+const APP_NAME = "tPerp";
 
 const walletTheme = merge(darkTheme(), {
   colors: {
@@ -38,8 +38,8 @@ const walletTheme = merge(darkTheme(), {
   },
 } as Theme);
 
-const { chains, provider } = configureChains(
-  [arbitrum, avalanche, ...(isDevelopment() ? [arbitrumGoerli, avalancheFuji] : [])],
+const { chains, publicClient } = configureChains(
+  [arbitrum, avalanche, ...(isDevelopment() ? [arbitrumSepolia, avalancheFuji] : [])],
   [publicProvider()]
 );
 
@@ -75,15 +75,14 @@ const othersWalletList: WalletList = [
 
 const connectors = connectorsForWallets([...recommendedWalletList, ...othersWalletList]);
 
-const wagmiClient = createClient({
-  autoConnect: true,
+const config = createConfig({
   connectors,
-  provider,
+  publicClient,
 });
 
 export default function WalletProvider({ children }) {
   return (
-    <WagmiConfig client={wagmiClient}>
+    <WagmiConfig config={config}>
       <RainbowKitProvider theme={walletTheme} chains={chains} modalSize="compact">
         {children}
       </RainbowKitProvider>

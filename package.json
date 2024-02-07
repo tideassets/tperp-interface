@@ -11,7 +11,7 @@
     "@headlessui/react": "1.6.1",
     "@lingui/core": "3.13.3",
     "@lingui/react": "3.13.3",
-    "@rainbow-me/rainbowkit": "0.12.18",
+    "@rainbow-me/rainbowkit": "latest",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "11.2.7",
     "@testing-library/user-event": "12.8.3",
@@ -60,8 +60,8 @@
     "typescript": "4.7.4",
     "url": "0.11.3",
     "use-context-selector": "1.4.1",
-    "viem": "1.1.4",
-    "wagmi": "0.12.19",
+    "viem": "1.21.4",
+    "wagmi": "1.4.13",
     "web-vitals": "1.1.2"
   },
   "resolutions": {

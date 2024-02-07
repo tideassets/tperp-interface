@@ -31,6 +31,7 @@ if (isDevelopment()) {
 
 export const IS_NETWORK_DISABLED = {
   [ARBITRUM]: false,
+  [ARBITRUM_SEPOLIA]: false,
   [AVALANCHE]: false,
   [BSС_MAINNET]: false,
 };
@@ -56,6 +57,7 @@ export const MAX_GAS_PRICE_MAP = {
 
 export const HIGH_EXECUTION_FEES_MAP = {
   [ARBITRUM]: 3, // 3 USD
+  [ARBITRUM_SEPOLIA]: 3, // 3 USD
   [AVALANCHE]: 3, // 3 USD
   [AVALANCHE_FUJI]: 3, // 3 USD
 };
@@ -66,6 +68,7 @@ export const EXECUTION_FEE_MULTIPLIER_MAP = {
   // if gas prices on Ethereum are high, than the gas usage might be higher, this calculation doesn't deal with that
   // case yet
   [ARBITRUM]: 65000,
+  [ARBITRUM_SEPOLIA]: 65000,
   // multiplier for Avalanche is just the average gas usage
   [AVALANCHE]: 700000,
   [AVALANCHE_FUJI]: 700000,
@@ -73,6 +76,7 @@ export const EXECUTION_FEE_MULTIPLIER_MAP = {
 
 export const NETWORK_EXECUTION_TO_CREATE_FEE_FACTOR = {
   [ARBITRUM]: BigNumber.from(10).pow(29).mul(5),
+  [ARBITRUM_SEPOLIA]: BigNumber.from(10).pow(29).mul(5),
   [AVALANCHE]: BigNumber.from(10).pow(29).mul(35),
   [AVALANCHE_FUJI]: BigNumber.from(10).pow(29).mul(2),
 } as const;

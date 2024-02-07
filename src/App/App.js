@@ -413,7 +413,7 @@ function FullApp() {
               <Route exact path="/">
                 <Redirect to="/trade" />
               </Route>
-              <Route exact path="/v1">
+              {/* <Route exact path="/v1">
                 <Exchange
                   ref={exchangeRef}
                   savedShowPnlAfterFees={savedShowPnlAfterFees}
@@ -439,10 +439,10 @@ function FullApp() {
               <Redirect exact from="/stats/v2" to="/stats" />
               <Route exact path="/stats">
                 {getIsSyntheticsSupported(chainId) ? <SyntheticsStats /> : <SyntheticsFallbackPage />}
-              </Route>
-              <Route exact path="/earn">
+              </Route> */}
+              {/* <Route exact path="/earn">
                 <Stake setPendingTxns={setPendingTxns} />
-              </Route>
+              </Route> */}
               <Route exact path="/buy">
                 <Buy savedSlippageAmount={settings.savedAllowedSlippage} setPendingTxns={setPendingTxns} />
               </Route>
@@ -477,7 +477,7 @@ function FullApp() {
                 )}
               </Route>
               <Redirect from="/v2" to="/trade" />
-              <Route exact path="/buy_glp">
+              {/* <Route exact path="/buy_glp">
                 <BuyGlp
                   savedSlippageAmount={settings.savedAllowedSlippage}
                   setPendingTxns={setPendingTxns}
@@ -517,7 +517,7 @@ function FullApp() {
                   savedIsPnlInLeverage={savedIsPnlInLeverage}
                   savedShowPnlAfterFees={savedShowPnlAfterFees}
                 />
-              </Route>
+              </Route> */}
               <Redirect exact from="/actions/v2" to="/actions" />
               <Route exact path="/actions/:account">
                 <SyntheticsActions
@@ -528,9 +528,9 @@ function FullApp() {
               <Route path="/actions/v2/:account">
                 {({ match }) => <Redirect to={`/actions/${match.params.account}`} />}
               </Route>
-              <Route exact path="/referrals-tier">
+              {/* <Route exact path="/referrals-tier">
                 <ReferralsTier />
-              </Route>
+              </Route> */}
               <Route exact path="/stats">
                 <Stats />
               </Route>

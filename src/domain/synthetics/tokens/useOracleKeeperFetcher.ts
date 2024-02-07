@@ -97,7 +97,7 @@ export function useOracleKeeperFetcher(chainId: number) {
     };
 
     function fetchTickers(): Promise<TickersResponse> {
-      return fetch(buildUrl(oracleKeeperUrl!, "/prices/tickers"))
+      return fetch(buildUrl(oracleKeeperUrl!, "/prices/"))
         .then((res) => res.json())
         .then((res) => {
           if (!res.length) {
